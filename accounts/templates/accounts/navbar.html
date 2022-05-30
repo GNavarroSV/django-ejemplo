@@ -1,0 +1,52 @@
+{% load static %}
+
+<style>
+  .hello-msg{
+    font-size: 18px;
+    color:#FFA500;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <img src = "{%static 'images/logoalmacen.png'%}" width = "75" length = "100">
+   
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!--conditional to load content for special role-->
+        {%if request.user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home'%}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'products'%}">Products</a>
+        </li>
+        {% else %}
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'account' %}">Settings</a>
+      </li>
+      {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Check us out!
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="{% url 'about'%}">About us</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'primary'%}">Primary Goal</a>
+          
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'contact'%}">Contact us</a>
+          </div>
+        </li>
+       
+      </ul>
+    </div>
+    <span class = "hello-msg">Hello, {{request.user}}</span>
+    <span ><a style = "color:white" class = "nav-link" href = "{%url 'logout'%}">Logout</a></span>
+  </nav>
+  
